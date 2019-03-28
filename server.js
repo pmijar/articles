@@ -27,8 +27,12 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
+if(process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+}
+else {
 mongoose.connect("mongodb://localhost/newsNotes", { useNewUrlParser: true });
-
+}
 // Routes
 
 // A GET route for scraping the BBC website
